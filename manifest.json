@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "My First Extension",
+  "version": "1.0.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [ "content.js"]
+    }
+  ],
+"background": {
+  "scripts": ["background.js"]
+},
+    "browser_action": {
+        "default_title": "Record",
+        
+        "default_popup": "main.html"
+    }
+}
