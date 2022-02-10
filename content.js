@@ -80,14 +80,34 @@ Object.keys(window).forEach(key => {
     }
 })
 
+function get_selector(arr) {
+     let element = ''
+     for (i in arr){
 
+        if (arr[i].id){
+            element='#'+arr[i].id
+            continue
+        }else if (arr[i].className){
+            class_  =  arr[i].className.split(" ").length < 2 ? arr[i].className : arr[i].className.split(" ")[0]
+            element = element.length ? element + `> .${class_}` : '.' + element
+        }
+
+     }
+     return element  
+}
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(request)
+    let arr_selected = []
     if( request.message == "PlayRecord" ) {
-        console.log(request)
+       console.log('zhopa')
+       console.log(request.history)
+       for (i in request.history){
+        console.log(request.history[i])
+         arr_selected.push(get_selector(request.history[i].events.path_class_name_or_id.reverse() ))
+       }
         
     }
+    
   })
 
 // setInterval(()=>{stor_action[current_location][stor_action[current_location].length -1] },1000)

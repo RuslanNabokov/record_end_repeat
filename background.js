@@ -34,7 +34,7 @@ chrome.runtime.onMessage.addListener(
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     var activeTab = tabs[0];
     console.log(activeTab)
-     chrome.tabs.sendMessage(activeTab.id,{"message":'PlayRecord','hisory':history_action})
+     chrome.tabs.sendMessage(activeTab.id,{"message":'PlayRecord','history':history_action})
     });
 
     }    
