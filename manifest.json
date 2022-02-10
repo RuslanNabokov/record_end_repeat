@@ -7,7 +7,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": [ "content.js"]
+      "js": [ "content.js"] // on page
     }
   ],
 "background": {
@@ -17,5 +17,6 @@
         "default_title": "Record",
         
         "default_popup": "main.html"
-    }
+    },
+  "permissions":["storage"]
 }
