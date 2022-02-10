@@ -49,21 +49,32 @@ function copy_obj(obj){
     }
 }
 
+function get_prop(obj,key) {
+    try {
+
+    return  obj[key];
+  } catch (e) {
+    return '';
+  }
+
+}
+
 
 Object.keys(window).forEach(key => {
     if(/^on/.test(key)){
         window.addEventListener(key.slice(2), event => {
 
            if (event.type =='click'){ 
-            event_transfer =  copy_obj(event)
-            event_transfer.path_d  = []
+            event_transfer = copy_obj(event)
+          
+            event_transfer.path_class_name_or_id  = []
             for (i in event.path){
                
-                event_transfer.path_d.push(event.path[i]['className'])
+    event_transfer.path_class_name_or_id.push({'id':get_prop(event.path[i],'id'),'className':get_prop(event.path[i],'className')})
             }
+            event_transfer.current_location = current_location
             
-            stor_action[current_location].push({event_transfer })
-            chrome.storage.sync.set({current_location: stor_action[current_location]},function(result){ console.log(`update store for ${current_location}`)} ) 
+            chrome.storage.sync.set({data: event_transfer},function(result){ console.log(`update store for ${current_location}`)} ) 
         }
         })
     }
@@ -72,8 +83,10 @@ Object.keys(window).forEach(key => {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if( request.message === "startRecord" ) {
-        console.log('start')
+    console.log(request)
+    if( request.message == "PlayRecord" ) {
+        console.log(request)
+        
     }
   })
 

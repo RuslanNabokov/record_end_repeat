@@ -1,9 +1,12 @@
 
 
 
-let start_button  = document.getElementById('StartRecord')
+let start_button  = document.getElementById('StartRecord')   
 
 let play_button  = document.getElementById('PlayRecord')
+
+
+
 
 start_button.addEventListener('click',function(){
 if(start_button.innerText.toLowerCase() === 'начать запись') {
@@ -16,7 +19,7 @@ if(start_button.innerText.toLowerCase() === 'начать запись') {
 })
 
 
-srart_button.addEventListener('click',function(){
+play_button.addEventListener('click',function(){
 	
 	chrome.runtime.sendMessage({'event':'PlayRecord'});	
 
