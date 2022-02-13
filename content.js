@@ -70,11 +70,11 @@ Object.keys(window).forEach(key => {
             event_transfer.path_class_name_or_id  = []
             for (i in event.path){
                
-    event_transfer.path_class_name_or_id.push({'id':get_prop(event.path[i],'id'),'className':get_prop(event.path[i],'className')})
+            event_transfer.path_class_name_or_id.push({'id':get_prop(event.path[i],'id'),'className':get_prop(event.path[i],'className')})
             }
             event_transfer.current_location = current_location
             
-            chrome.storage.sync.set({data: event_transfer},function(result){ console.log(`update store for ${current_location}`)} ) 
+            chrome.storage.local.set({data: event_transfer},function(result){ console.log(`update store for ${current_location}`)} ) 
         }
         })
     }
@@ -97,18 +97,21 @@ function get_selector(arr) {
 }
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+    console.log(request)
     let arr_selected = []
     if( request.message == "PlayRecord" ) {
-       console.log('zhopa')
-       console.log(request.history)
+     
+     
        for (i in request.history){
-        console.log(request.history[i])
+      
          arr_selected.push(get_selector(request.history[i].events.path_class_name_or_id.reverse() ))
        }
         
     }
     
   })
+
+
 
 // setInterval(()=>{stor_action[current_location][stor_action[current_location].length -1] },1000)
 

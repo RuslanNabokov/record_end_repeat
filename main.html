@@ -3,12 +3,71 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
   </head>
   <body>
-    <button id="StartRecord">Начать запись</button>
-     <button id="PlayRecord">Воспроизвести</button>
-     <script src="her.js"></script>
+
+  <div class="row">
+      <div class="col s2 col-recButton">
+         <button id="StartRecord" class = 'recButton buttonCircle inactive' > </button>
+      </div>
+            <div class="col s9 col-recField">
+             <div id ='recordField'> 
+
+                <hr id='lineRecord'>  </hr>
+             </div>
+      </div>
+
+  </div>
+        
+    
+     <!-- <script src="her.js"></script> -->
+
+     <script type="text/javascript">
+var current_ms = 0       
+
+  function write_cube_on_recordField(ms){
+    let current_block_time  = ms
+    let position_x =  current_block_time * one_ms_to_px
+    let block = document.createElement('div')
+    let block_style_left =  position_x + 'px'  
+    block.setAttribute('class', 'block-her')
+    block.style.setProperty('--element-left', block_style_left);
+    document.getElementById('recordField').appendChild(block)
+  }
+
+let test_arr_field_record = [10000,20000,20000]
+const length_filer_record = 220
+const delimeter = 44
+const one_ms_to_px = length_filer_record / 10000
+ for(let i = test_arr_field_record.length - 1; i >= 0; i--) {
+ 
+   write_cube_on_recordField(test_arr_field_record[i])
+
+
+  }
+
+
+
+  setInterval(function(){
+
+    // current_ms += 200 
+    let line = document.getElementById('lineRecord')
+    let record_field = document.getElementById('recordField')
+    // let blocks = record_field.querySelector('.block-her')
+    let blocks = document.getElementsByClassName('block-her')
+   
+    line.style.right =  line.style.right ? parseInt(line.style.right) + parseFloat(4.4) + 'px': one_ms_to_px
+    for (var i = blocks.length - 1; i >= 0; i--) {
+      let block =blocks[i]
+      let block_left = block.style.getPropertyValue('--element-left')
+    
+      block.style.setProperty('--element-left', parseFloat(block_left) - parseFloat(4.4)  + 'px' );
+    }
+  },200 )
+
+
+     </script>
   </body>
 </html>

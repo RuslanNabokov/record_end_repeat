@@ -12,30 +12,65 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
     history_action.push({'date': `${Data.getHours()}:${Data.getMinutes()}:${Data.getSeconds()}:${Data.getMilliseconds()}`,'events':newValue })
    
   }
-  console.log(history_action)
+
   });
 
+
+function start_record(){
+
+    start = true
+    chrome.runtime.sendMessage({
+    msg: "StartRecord", 
+    data: {}
+    });
+chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, {"message":   "startRecord"});
+    });
+
+chrome.storage.local.set({'status': 'StartRecord'}, function() {
+    console.log('Update storage: status: StartRecord')
+});
+
+}
+
+
+function stop_record(){
+    start = false
+    chrome.runtime.sendMessage({
+    msg: "StopRecord", 
+    data: {}
+    });
+chrome.storage.local.set({'status': 'StopRecord'}, function() {});
+console.log('Update storage: status: StartRecord')
+}
+function play_record(){
+    stop_record()
+chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    var activeTab = tabs[0];
+     chrome.tabs.sendMessage(activeTab.id,{"message":'PlayRecord','history':history_action})
+    });
+chrome.storage.local.set({'status': 'PlayRecord'}, function() {});
+
+}
 
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.event == 'StartRecord' ){ 
 
-    if (start==true){start=false;return}
-    console.log(start)
-    start = true
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    var activeTab = tabs[0];
-    chrome.tabs.sendMessage(activeTab.id, {"message": "startRecord"});
-    });
-    } if (request.event == 'PlayRecord' ){
-        console.log('stop')
-        start = false
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    var activeTab = tabs[0];
-    console.log(activeTab)
-     chrome.tabs.sendMessage(activeTab.id,{"message":'PlayRecord','history':history_action})
-    });
+    if (start){
+        stop_record()
+        return
+    }
+    start_record()
 
+    
+    } if (request.event == 'PlayRecord' ){
+        play_record()
+    
     }    
   });
+
+
+
