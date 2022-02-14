@@ -7,7 +7,7 @@
 
   </head>
   <body>
-
+<div class="container">
   <div class="row">
       <div class="col s2 col-recButton">
          <button id="StartRecord" class = 'recButton buttonCircle inactive' > </button>
@@ -16,11 +16,14 @@
              <div id ='recordField'> 
 
                 <hr id='lineRecord'>  </hr>
+              </div>
              </div>
       </div>
 
   </div>
+
         
+        </div>
     
      <!-- <script src="her.js"></script> -->
 
@@ -37,7 +40,7 @@ var current_ms = 0
     document.getElementById('recordField').appendChild(block)
   }
 
-let test_arr_field_record = [10000,20000,20000]
+let test_arr_field_record = [10,20,30,10000,20000,20000]
 const length_filer_record = 220
 const delimeter = 44
 const one_ms_to_px = length_filer_record / 10000
@@ -67,6 +70,15 @@ const one_ms_to_px = length_filer_record / 10000
     }
   },200 )
 
+
+
+let start_button  = document.getElementById('StartRecord')   
+
+start_button.addEventListener('click',function(){
+start_button.classList.toggle('inactive')
+start_button.classList.toggle('Rec')
+
+});
 
      </script>
   </body>

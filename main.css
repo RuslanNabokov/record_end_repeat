@@ -13,28 +13,32 @@ body{
 
 
 .buttonCircle{ 
-  width: 25px; 
-  height: 25px; 
+  width: 15px; 
+  height: 15px; 
   font-size: 0; 
 
   border: 0; 
-  border-radius: 25px;
+  border-radius: 15px;
    
-  outline: none; }
+  outline: none; 
+  padding: 0px !important
+}
 
-.recButton{
-  background-color: rgba(62, 38, 156, 0.8);
 
+#StartRecord{
+  background-color: rgb(169.75, 24.25, 28.25) ;
+  margin-top: calc(50% + 12px);
 
 }
 
-.recButton.inactive{
+
+#StartRecord.inactive{
   background-color: #631c1c !important; 
 }
 
 .Rec{
   animation-name: pulse;
-  animation-duration: 1.5s;
+  animation-duration: 0.95s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
@@ -42,12 +46,16 @@ body{
 .col-recButton{
   margin-right:0px !important;
   padding-right: 0px !important;
+  padding: 0px !important;
   height: 50px;
   position: relative;
-  padding-top: 12.5px !important;
+ 
+  width: max-content !important;
+
 
 
 }
+
 .col-recField{
   margin-left: 0px !important;
   padding-left: 0px !important;
@@ -89,12 +97,24 @@ transition: 0.6s;
 }
 @keyframes pulse{
   0%{
-    box-shadow: 0px 0px 5px 0px rgba(173,0,0,.3);
+    box-shadow: 0px 0px 5px 2px rgba(173,0,0,.3);
+    background-color:  rgba(173,0,0,.5) ;
+  }
+  35%{
+    box-shadow: 0px 0px 5px 7px rgba(189,0,0,.3);
+    background-color:  rgba(182,0,0,.6) ;
   }
   65%{
-    box-shadow: 0px 0px 5px 13px rgba(173,0,0,.3);
+    box-shadow: 0px 0px 5px 7px rgba(195,0,0,.3);
+    background-color:  rgba(195,0,0,.7) ;
   }
   90%{
-    box-shadow: 0px 0px 5px 13px rgba(173,0,0,0);
+    box-shadow: 0px 0px 5px 7px rgba(215,0,0,0.3);
+    background-color:  rgba(215,0,0,0.8);
+
   }
+  95%{
+     background-color:  rgba(215,0,0,0.9);
+  }
+
 }
