@@ -1,19 +1,19 @@
 
 
 
-// let start_button  = document.getElementById('StartRecord')   
+let start_button  = document.getElementById('StartRecord')   
 
 // let play_button  = document.getElementById('PlayRecord')
 
-// // chrome.storage.sync.get("key", function (obj) {
-// //     console.log(obj);
-// // });
-
-
-// start_button.addEventListener('click',function(){
-// chrome.runtime.sendMessage({'event':'StartRecord'});
-
+// chrome.storage.sync.get("key", function (obj) {
+//     console.log(obj);
 // });
+
+console.log(start_button)
+start_button.addEventListener('click',function(){
+chrome.runtime.sendMessage({'event':'StartRecord'});
+
+});
 
 
 // play_button.addEventListener('click',function(){
@@ -23,13 +23,13 @@
 
 
 
-// chrome.storage.local.get('status', function(result) {
+chrome.storage.local.get('status', function(result) {
 
-//  if ( result['status']  == 'StartRecord'){start_button.innerText = 'Остановить'}
-//  	else if (result['status'] = 'PlayRecord'){
-//  		play_button = 'Остановить воспроизведение'
-//  	}
-// });
+ if ( result['status']  == 'StartRecord'){start_button.innerText = 'Остановить'}
+ 	else if (result['status'] = 'PlayRecord'){
+ 		play_button = 'Остановить воспроизведение'
+ 	}
+});
 
 
 
@@ -63,7 +63,9 @@
 //         }
 //     }
 // );
-       let test_arr_field_record = [200,1500,4800,10000]
+
+
+let test_arr_field_record = [200,1500,4800,10000]
 const length_filer_record = 220
 const delimeter = 44
 const one_ms_to_px = length_filer_record / 10000

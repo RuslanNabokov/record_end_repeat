@@ -118,3 +118,31 @@ transition: 0.6s;
   }
 
 }
+
+
+
+#checkbox_average_time_click{ 
+padding: 0px;
+margin: 0px;
+
+ }
+
+.switch label .lever{
+  width: 25px !important;
+  height: 7px !important;
+}
+
+
+.switch label input[type="checkbox"]:checked 
++ .lever::before, .switch label input[type="checkbox"]:checked + .lever::after {
+ left: 14px !important;
+}
+
+
+.switch label 
+.lever::before, 
+.switch label .lever::after{
+   width: 14px !important;
+
+  height: 14px !important;
+}
