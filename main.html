@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ <script
+  src="jquery-2.2.4.js"></script>
+    <script type="text/javascript" src="materialize.min.js"></script>
+    <link rel="stylesheet" href="materialize.min.css">
+
+
 </head>
 
 <body>
@@ -22,27 +27,58 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s12 settings-buttons">
+        <div class="col s4 settings-buttons">
             <div class="switch" >
-                <label style='font-size:0.7em'>
+                <label style='font-size:0.65em'>
                     Уср. время клика
-                    <input type="checkbox" onchange="checkbox_a_t_c()" id="checkbox_average_time_click">
+                    <input type="checkbox" active="false"  id="checkbox_average_time_click">
                     <span class="lever"></span>
-                    
                 </label>
+    <div class="input-field col s7">
+    <select id ='sel'>
+      <option value="" disabled selected>1</option>
+      <option value="1">1</option>
+      <option value="2"> 2</option>
+      <option value="3">3</option>
+      <option value="Свое">Свое</option>
+    </select>
+  
+  </div>
+
             </div>
         </div>
+
+
     </div>
     </div>
     <!-- <script src="her.js"></script> -->
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    $('select').formSelect();
+     var instance = M.FormSelect.getInstance($('#sel'));
+
+     $("#sel").on('change', function() {
+           $("#sel").attr("onchange")
+    });
+
+        
     let checkbox_average_time_click =  document.getElementById('checkbox_average_time_click')
 
-    function  checkbox_a_t_c(){
- //     console.log(checkbox_average_time_click.checked) //true 
-    }
+    $('#checkbox_average_time_click').on('change',function() {
+       let status = document.getElementById('checkbox_average_time_click').getAttribute('active')
+       status = status == 'false' ? 'true':'false'
 
+
+       if (status == 'true'){
+            
+            $('.input-field').show()
+
+       }else{
+        $('.input-field').hide()
+       }
+       document.getElementById('checkbox_average_time_click').setAttribute('active',status)
+    })
     var current_ms = 0
 
     function write_cube_on_recordField(ms) {
@@ -94,6 +130,11 @@
         start_button.classList.toggle('Rec')
 
     });
+   
+});
+
+
+
     </script>
 </body>
 
